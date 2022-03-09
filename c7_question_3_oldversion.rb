@@ -61,42 +61,62 @@
 #   neither
 #   You survived!
 #   ```
-def prt(player,location) 
+
 river = "-----,--C--,CC-CC,CC-CC"
 river = river.split(",")
-river[location] = player
+river[0] = "--P--"
 puts river
-end
-
-count = 0
-play ={:player0 => "--P--", :player1 => "-PC--", :player2 => "--CP-", :player3 => "CCPCC", :player4 => "CCPCC"}
-while count < 5
-  if count == 0
-    prt(play[:player0],count)
-    count += 1  
-  end
-  puts "Type left right or neither"
-  move = gets.chomp.capitalize
-  
-  if count == 1 && move == "Left"
-     prt(play[:player1],count)
-     count += 1
-  elsif count == 1 && move == "Right"
-     prt(play[:player2],count)
-     count += 1
-  elsif count == 2 && (move == "Right" || move == "Left")
-     prt(play[:player3],count)
-     count += 1
-  elsif count == 3 && move == "Neither"
-     prt(play[:player4],count)
-     count +=1
-  elsif count == 4 && move == "Neither"
-    puts "You survived"
-    abort
-  else 
-    puts "You are eaten"
-    abort
-  end 
-end
-
+# First move
+puts "Type left right or neither"
+move = gets.chomp.capitalize
+if move == "Left"
+  river[1] = "-PC--"
+elsif move == "Right"
+  river[1] = "--CP-"
+elsif move == "Neither"
+  puts "You were eaten."
+  abort  
+end 
+river[0] = "-----"
+puts river
+# Second move
+puts "Type left right or neither"
+move = gets.chomp.capitalize
+if move == "Left"
+  puts "You were eaten."
+  abort
+elsif move == "Right"
+  puts "You were eaten."
+  abort  
+elsif move == "Neither"
+  river[2] = "CCPCC"  
+end 
+river[1] = "--C--"
+puts river
+# Third move
+puts "Type left right or neither"
+move = gets.chomp.capitalize
+if move == "Left"
+  puts "You were eaten."
+  abort
+elsif move == "Right"
+  puts "You were eaten."
+  abort  
+elsif move == "Neither"
+  river[2] = "CCPCC"  
+end 
+river[2] = "CC-CC"
+puts river
+# Fourth Move
+puts "Type left right or neither"
+move = gets.chomp.capitalize
+if move == "Left"
+  puts "You were eaten."
+  abort
+elsif move == "Right"
+  puts "You were eaten."
+  abort  
+elsif move == "Neither"
+  puts "You survived"  
+end 
 
